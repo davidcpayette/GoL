@@ -28,6 +28,7 @@
             <string>behavior = 1;
 beh_max = 4;
 movedist = sprite_width;
+hp = 1;
 </string>
           </argument>
         </arguments>
@@ -53,7 +54,7 @@ movedist = sprite_width;
             <string>event_inherited();
 control = instance_nearest(x,y,oPlayerControl);
 if(control.tick){
-   switch(behavior){
+   switch(behavior){//tick:move,move,attack,turn
         case 1: 
             move();
             break;
@@ -71,6 +72,7 @@ if(control.tick){
     behavior++;
     if(behavior &gt; beh_max){behavior -= beh_max;}
 }
+health_control();
 </string>
           </argument>
         </arguments>

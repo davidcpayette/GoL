@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>oObstacle</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="3" enumb="0">
@@ -25,23 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>facing = string("right");
-if(image_angle &gt; 360){image_angle -= 360;}
-if(image_angle &lt; 0){image_angle += 360;}
-switch(image_angle)
+            <string>if(keyboard_check_pressed(vk_space))
 {
-    case 0: 
-        facing = "right"; 
-        break;
-    case 90:
-        facing = "up";
-        break;
-    case 180:
-        facing = "left";
-        break;
-    case 270:
-        facing = "down";
-        break;
+    room_goto_next();
 }
 </string>
           </argument>

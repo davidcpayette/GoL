@@ -35,6 +35,13 @@ play_hit = false;
 stepped = false;
 ticktock = 0;
 guivalign = 640 - 56;
+num_frames = 20;
+playsprite = 1;
+//object_list = array_create(0);
+object_list[0] = noone;
+object_num = array_create(0);
+selector = 0;
+obj = noone;
 </string>
           </argument>
         </arguments>
@@ -108,56 +115,100 @@ alarm[1] = 2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(keyboard_check_pressed(vk_space) || stepped)
+            <string>tick = false; //Initialize, to be sure tick doesn't happen more than one frame
+
+//space bar to play, ticks every 30 frames (1 second)
+if(keyboard_check_pressed(vk_space))// || stepped)
 {
-    if(play == 0)
+    if(play == 0) //if pressing space and not playing, play
     {
         play = 1;
         play_hit = true;
     }
-    else if(play &gt; 0 || stepped)
+    else if(play &gt; 0)// || stepped) //if pressing space and playing, pause
     {
         play = 0;
-        stepped = false;
+        //stepped = false;
         tick = false;
     }   
 }
 
-if(play &gt; 1)
+if(play &gt; 1) //if playing, don't tick until... 
 {
     tick = false;
-    if(play == 30){play = 0;}
+    if(play == num_frames){play = 0;}
     play ++;
 }
 
-if(play == 1)
+if(play == 1) //... play is 1
 {
     play ++;
     tick = true;
 }
 
+//right arrow to step 1 frame at a time
 if(keyboard_check_pressed(vk_right) &amp;&amp; play == 0)
 {
     tick = true;   
     //stepped = true; 
     play_hit = true;
-    alarm[1] = 1;
+    //alarm[1] = 1;
 }
 
-if(keyboard_check_pressed(ord('R'))){game_restart();}
+//tab through objects to place in level
+if(keyboard_check_pressed(vk_tab))
+{   
+    if(selector &lt; array_length_1d(object_list)-1)
+    {
+        selector++;
+    }
+    else
+    {
+        selector = 0;
+    }
+}
 
-if(mouse_check_button_pressed(mb_left) &amp;&amp; holenum &gt; 0 &amp;&amp; play_hit = false)
+//place objects in level, only works for holes right now
+if(mouse_check_button_pressed(mb_left) &amp;&amp; play_hit = false &amp;&amp; object_num[selector]&gt;0)
 {
-    inst = instance_create(mouse_x, mouse_y,oHole);
-    with(inst){move_snap(32,32);}
-    holenum--;
+    if(object_list[selector] != noone)
+    {
+        string_to_object(object_list[selector]); 
+    }
+    if(obj != noone)
+    { 
+        inst = instance_create(mouse_x, mouse_y,obj);
+        with(inst){move_snap(32,32);}
+        object_num[selector]--;
+    }
 }
 
+//advances subimage of the clock sprite
 if(tick)
-{
-    ticktock++;
-    if(ticktock &gt; 3){ticktock -= 4;}
+{    
+    if(ticktock &lt; sprite_get_number(sTickClock) - 1)
+    {
+        ticktock++;
+    }
+    else
+    {
+        ticktock = 0;
+    }
 }
+
+//switches subimage of play/pause sprite
+if(play &gt; 0)
+{
+    playsprite = 0;   
+}   
+else
+{
+    playsprite = 1;
+}
+
+//restart level with "r"
+if(keyboard_check_pressed(ord('R'))){room_restart();}
+if(keyboard_check_pressed(vk_escape)){game_restart();}
 
 </string>
           </argument>
@@ -181,14 +232,26 @@ if(tick)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_colour(c_black);
+            <string>spr = sWall;
+draw_set_colour(c_black);
 draw_rectangle(640-112,0,640,480,false);
 draw_set_colour(c_teal);
 draw_rectangle(640-100,12,628,468,false);
 draw_set_colour(c_black);
-draw_text(guivalign - 40,96,string(holenum));
+
 draw_sprite(sTickClock,ticktock,guivalign,32);
-draw_sprite(sHole,0,guivalign,96);
+for(var i = 0; i &lt; array_length_1d(object_list); i++)
+{
+    string_to_sprite(object_list[i]);
+    draw_sprite(spr,0,guivalign,96+36*i);
+}
+for(var j = 0; j &lt; array_length_1d(object_num); j++)
+{
+    draw_text(guivalign - 40,96 + 36*j,string(object_num[j]));
+}
+if(!play_hit){draw_sprite(sSelector,0,guivalign + 32,96+36*selector);}
+
+draw_sprite(sPlayPause,playsprite,guivalign - 32, 32);
 if(play_hit){draw_sprite(sLock,0,guivalign + 32,32);}
 
 

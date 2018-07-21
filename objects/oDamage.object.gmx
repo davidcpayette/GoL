@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>alarm[0] = 2;
+            <string>alarm[0] = 2; //destroys itself after 2 frames
 </string>
           </argument>
         </arguments>
@@ -48,7 +48,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_destroy();
+            <string>///destroys self
+instance_destroy();
 </string>
           </argument>
         </arguments>

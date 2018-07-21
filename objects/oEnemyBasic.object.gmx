@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>movedist = oEnemyBasic.sprite_width; 
 behavior = 1; 
+hp = 1;
 </string>
           </argument>
         </arguments>
@@ -52,7 +53,7 @@ behavior = 1;
             <string>event_inherited();
 control = instance_nearest(x,y,oPlayerControl);
 if(control.tick){
-   switch(behavior){
+   switch(behavior){ //tick:move,attackfront
         case 1: 
             move();
             attack_warning();
@@ -63,6 +64,7 @@ if(control.tick){
     }
     behavior*=-1;
 }
+health_control();
 
 </string>
           </argument>

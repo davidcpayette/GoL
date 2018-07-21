@@ -17,8 +17,13 @@
     <sprite>sprites\sEnemyTurner</sprite>
     <sprite>sprites\sTickClock</sprite>
     <sprite>sprites\sLock</sprite>
+    <sprite>sprites\sAntivirusBasic</sprite>
+    <sprite>sprites\sPlayPause</sprite>
+    <sprite>sprites\sSelector</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\splash</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\move.gml</script>
@@ -27,25 +32,37 @@
     <script>scripts\mine_drop.gml</script>
     <script>scripts\mine_explode.gml</script>
     <script>scripts\turn_left.gml</script>
+    <script>scripts\health_control.gml</script>
+    <script>scripts\string_to_sprite.gml</script>
+    <script>scripts\string_to_object.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_new</font>
   </fonts>
   <objects name="objects">
-    <object>objects\oEnemyBasic</object>
-    <object>objects\oRoomGrid</object>
-    <object>objects\oDamage</object>
-    <object>objects\oWall</object>
-    <object>objects\oObstacle</object>
-    <object>objects\oMovingObject</object>
-    <object>objects\oHitWarning</object>
-    <object>objects\oEnemyDropper</object>
-    <object>objects\oMine</object>
     <object>objects\oPlayerControl</object>
-    <object>objects\oHole</object>
-    <object>objects\oEnemyTurner</object>
+    <objects name="Parents">
+      <object>objects\oObstacle</object>
+      <object>objects\oMovingObject</object>
+    </objects>
+    <objects name="Game Objects">
+      <object>objects\oEnemyTurner</object>
+      <object>objects\oHole</object>
+      <object>objects\oMine</object>
+      <object>objects\oEnemyDropper</object>
+      <object>objects\oWall</object>
+      <object>objects\oEnemyBasic</object>
+      <object>objects\oAntivirusBasic</object>
+    </objects>
+    <objects name="Other">
+      <object>objects\oHitWarning</object>
+      <object>objects\oDamage</object>
+      <object>objects\oRoomGrid</object>
+      <object>objects\oSplashObject</object>
+    </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rSplash</room>
     <room>rooms\room0</room>
   </rooms>
   <help>

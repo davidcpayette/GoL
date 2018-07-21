@@ -53,7 +53,7 @@ iframe = false;
             <string>if(place_meeting(x,y,oDamage) &amp;&amp; !iframe)
 {
     hp--; 
-    image_index = 3-hp;
+    image_index = image_number-hp;
     iframe = true;
 }
 if(!place_meeting(x,y,oDamage))

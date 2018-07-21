@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>movedist = sprite_width; 
 behavior = 1; 
+hp = 1;
 </string>
           </argument>
         </arguments>
@@ -52,7 +53,7 @@ behavior = 1;
             <string>event_inherited();
 control = instance_nearest(x,y,oPlayerControl);
 if(control.tick){
-   switch(behavior){
+   switch(behavior){ //tick:move,move,mine
         case 1: 
         case 2:
             move();
@@ -65,6 +66,7 @@ if(control.tick){
     behavior++;
     if(behavior &gt; 3){behavior -= 3;}
 }
+health_control();
 </string>
           </argument>
         </arguments>
