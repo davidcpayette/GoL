@@ -9,6 +9,7 @@
     <sprite>sprites\sEnemyBasic</sprite>
     <sprite>sprites\sDamage</sprite>
     <sprite>sprites\sWall</sprite>
+    <sprite>sprites\sUnbreakableWall</sprite>
     <sprite>sprites\sHitWarning</sprite>
     <sprite>sprites\sMultiHitWarning</sprite>
     <sprite>sprites\sEnemyDropper</sprite>
@@ -20,6 +21,7 @@
     <sprite>sprites\sAntivirusBasic</sprite>
     <sprite>sprites\sPlayPause</sprite>
     <sprite>sprites\sSelector</sprite>
+    <sprite>sprites\sPlacementAllow</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\splash</background>
@@ -59,11 +61,18 @@
       <object>objects\oDamage</object>
       <object>objects\oRoomGrid</object>
       <object>objects\oSplashObject</object>
+      <object>objects\oPlacementAllow</object>
+      <object>objects\oUnbreakableWall</object>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rSplash</room>
-    <room>rooms\room0</room>
+    <room>rooms\level0</room>
+    <room>rooms\level1</room>
+    <room>rooms\level2</room>
+    <room>rooms\level3</room>
+    <room>rooms\level4</room>
+    <room>rooms\level5</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

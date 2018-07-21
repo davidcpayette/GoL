@@ -6,4 +6,10 @@ switch(argument0)
     case "AntivirusBasic":
         spr = sAntivirusBasic;
         break;
+    case "EnemyTurner":
+        spr = sEnemyTurner;
+        break;
+    case "Wall":
+        spr = sWall;
+        break;
 }

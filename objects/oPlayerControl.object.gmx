@@ -117,18 +117,27 @@ alarm[1] = 2;
             <kind>1</kind>
             <string>tick = false; //Initialize, to be sure tick doesn't happen more than one frame
 
-//space bar to play, ticks every 30 frames (1 second)
-if(keyboard_check_pressed(vk_space))// || stepped)
+//press up/down to make tick rate increase/decrease
+if(keyboard_check_pressed(vk_up) &amp;&amp; play == 0)
+{
+    if(num_frames &gt; 10){num_frames -= 10;}
+} 
+if(keyboard_check_pressed(vk_down) &amp;&amp; play == 0)
+{
+    if(num_frames &lt; 30){num_frames += 10;}
+}
+
+//space bar to play, ticks at set intervals
+if(keyboard_check_pressed(vk_space))
 {
     if(play == 0) //if pressing space and not playing, play
     {
         play = 1;
         play_hit = true;
     }
-    else if(play &gt; 0)// || stepped) //if pressing space and playing, pause
+    else if(play &gt; 0) //if pressing space and playing, pause
     {
         play = 0;
-        //stepped = false;
         tick = false;
     }   
 }
@@ -169,7 +178,7 @@ if(keyboard_check_pressed(vk_tab))
 }
 
 //place objects in level, only works for holes right now
-if(mouse_check_button_pressed(mb_left) &amp;&amp; play_hit = false &amp;&amp; object_num[selector]&gt;0)
+if(mouse_check_button_pressed(mb_left) &amp;&amp; position_meeting(mouse_x,mouse_y,oPlacementAllow) &amp;&amp; play_hit = false &amp;&amp; object_num[selector]&gt;0)
 {
     if(object_list[selector] != noone)
     {
@@ -178,7 +187,12 @@ if(mouse_check_button_pressed(mb_left) &amp;&amp; play_hit = false &amp;&amp; ob
     if(obj != noone)
     { 
         inst = instance_create(mouse_x, mouse_y,obj);
-        with(inst){move_snap(32,32);}
+        with(inst)
+        {
+            move_snap(32,32);       
+            inst = instance_place(x,y,oPlacementAllow);
+            with(inst){instance_destroy();}
+        }
         object_num[selector]--;
     }
 }
@@ -208,7 +222,12 @@ else
 
 //restart level with "r"
 if(keyboard_check_pressed(ord('R'))){room_restart();}
+
+//restart game with "esc"
 if(keyboard_check_pressed(vk_escape)){game_restart();}
+
+//level change
+if(((play_hit &amp;&amp; !instance_exists(oMovingObject)) || keyboard_check_pressed(vk_rshift)) &amp;&amp; room != room_last){room_goto_next();}
 
 </string>
           </argument>
@@ -232,27 +251,30 @@ if(keyboard_check_pressed(vk_escape)){game_restart();}
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>spr = sWall;
-draw_set_colour(c_black);
+            <string>spr = noone;
+draw_set_colour(c_navy);
 draw_rectangle(640-112,0,640,480,false);
-draw_set_colour(c_teal);
+draw_set_colour(c_ltgray);
 draw_rectangle(640-100,12,628,468,false);
 draw_set_colour(c_black);
 
 draw_sprite(sTickClock,ticktock,guivalign,32);
-for(var i = 0; i &lt; array_length_1d(object_list); i++)
-{
-    string_to_sprite(object_list[i]);
-    draw_sprite(spr,0,guivalign,96+36*i);
+if(room != level0)
+{    
+    for(var i = 0; i &lt; array_length_1d(object_list); i++)
+    {
+        string_to_sprite(object_list[i]);
+        draw_sprite(spr,0,guivalign,96+36*i);
+    }
+    for(var j = 0; j &lt; array_length_1d(object_num); j++)
+    {
+        draw_text(guivalign - 40,96 + 36*j,string(object_num[j]));
+    }
+    if(!play_hit){draw_sprite(sSelector,0,guivalign + 32,96+36*selector);}
+    if(play_hit){draw_sprite(sLock,0,guivalign + 32,32);}
 }
-for(var j = 0; j &lt; array_length_1d(object_num); j++)
-{
-    draw_text(guivalign - 40,96 + 36*j,string(object_num[j]));
-}
-if(!play_hit){draw_sprite(sSelector,0,guivalign + 32,96+36*selector);}
-
 draw_sprite(sPlayPause,playsprite,guivalign - 32, 32);
-if(play_hit){draw_sprite(sLock,0,guivalign + 32,32);}
+
 
 
 </string>

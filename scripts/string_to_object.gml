@@ -6,4 +6,11 @@ switch(argument0)
     case "AntivirusBasic":
         obj = oAntivirusBasic;
         break;
+    case "EnemyTurner":
+        obj = oEnemyTurner;
+        break;
+    case "Wall":
+        obj = oWall;
+        break;
+        
 }

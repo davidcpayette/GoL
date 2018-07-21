@@ -49,7 +49,7 @@
           <argument>
             <kind>1</kind>
             <string>if(place_meeting(x,y,oHitWarning)){sprite_index = sMultiHitWarning}
-if(oPlayerControl.tick &amp;&amp; destroy_next_tick){instance_destroy();}
+if((oPlayerControl.tick &amp;&amp; destroy_next_tick) || place_meeting(x,y,oDamage)){instance_destroy();}
 if(oPlayerControl.tick){destroy_next_tick = true;}
 
 </string>
