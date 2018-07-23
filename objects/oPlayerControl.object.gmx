@@ -201,7 +201,7 @@ if(mouse_check_button_pressed(mb_left) &amp;&amp; position_meeting(mouse_x,mouse
 }
 
 //undo object placement
-if(mouse_check_button_pressed(mb_right) &amp;&amp; ds_list_size(undolist)!=0)
+if(mouse_check_button_pressed(mb_right) &amp;&amp; ds_list_size(undolist)!=0 &amp;&amp; !play_hit)
 {
     inst = ds_list_find_value(undolist,ds_list_size(undolist)-1);
     object_num[undo[inst.x,inst.y]]++;
