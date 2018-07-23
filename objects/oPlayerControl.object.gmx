@@ -42,6 +42,7 @@ object_list[0] = noone;
 object_num = array_create(0);
 selector = 0;
 obj = noone;
+undolist = ds_list_create();
 </string>
           </argument>
         </arguments>
@@ -191,10 +192,21 @@ if(mouse_check_button_pressed(mb_left) &amp;&amp; position_meeting(mouse_x,mouse
         {
             move_snap(32,32);       
             inst = instance_place(x,y,oPlacementAllow);
-            with(inst){instance_destroy();}
+            //with(inst){instance_destroy();}
         }
+        undo[inst.x,inst.y] = selector;
+        ds_list_add(undolist,inst);
         object_num[selector]--;
     }
+}
+
+//undo object placement
+if(mouse_check_button_pressed(mb_right) &amp;&amp; ds_list_size(undolist)!=0)
+{
+    inst = ds_list_find_value(undolist,ds_list_size(undolist)-1);
+    object_num[undo[inst.x,inst.y]]++;
+    with(inst){instance_destroy();}
+    ds_list_delete(undolist,ds_list_size(undolist)-1);
 }
 
 //advances subimage of the clock sprite
