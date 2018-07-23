@@ -22,6 +22,7 @@
     <sprite>sprites\sPlayPause</sprite>
     <sprite>sprites\sSelector</sprite>
     <sprite>sprites\sPlacementAllow</sprite>
+    <sprite>sprites\sPlacementUsed</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\splash</background>
@@ -63,6 +64,7 @@
       <object>objects\oSplashObject</object>
       <object>objects\oPlacementAllow</object>
       <object>objects\oUnbreakableWall</object>
+      <object>objects\oPlacementUsed</object>
     </objects>
   </objects>
   <rooms name="rooms">

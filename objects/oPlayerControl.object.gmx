@@ -179,7 +179,10 @@ if(keyboard_check_pressed(vk_tab))
 }
 
 //place objects in level, only works for holes right now
-if(mouse_check_button_pressed(mb_left) &amp;&amp; position_meeting(mouse_x,mouse_y,oPlacementAllow) &amp;&amp; play_hit = false &amp;&amp; object_num[selector]&gt;0)
+if(mouse_check_button_pressed(mb_left) &amp;&amp; 
+    position_meeting(mouse_x,mouse_y,oPlacementAllow) &amp;&amp; 
+    play_hit = false &amp;&amp; 
+    object_num[selector]&gt;0)
 {
     if(object_list[selector] != noone)
     {
@@ -187,13 +190,10 @@ if(mouse_check_button_pressed(mb_left) &amp;&amp; position_meeting(mouse_x,mouse
     }
     if(obj != noone)
     { 
-        inst = instance_create(mouse_x, mouse_y,obj);
-        with(inst)
-        {
-            move_snap(32,32);       
-            inst = instance_place(x,y,oPlacementAllow);
-            //with(inst){instance_destroy();}
-        }
+        spot = instance_position(mouse_x, mouse_y, oPlacementAllow);
+        inst = instance_create(spot.x, spot.y,obj);
+        instance_create(spot.x, spot.y, oPlacementUsed);
+        with(spot){instance_destroy();}
         undo[inst.x,inst.y] = selector;
         ds_list_add(undolist,inst);
         object_num[selector]--;
@@ -205,6 +205,12 @@ if(mouse_check_button_pressed(mb_right) &amp;&amp; ds_list_size(undolist)!=0 &am
 {
     inst = ds_list_find_value(undolist,ds_list_size(undolist)-1);
     object_num[undo[inst.x,inst.y]]++;
+    if(position_meeting(inst.x,inst.y,oPlacementUsed))
+    {
+        instance_create(inst.x,inst.y,oPlacementAllow);
+        clearspot = instance_position(inst.x,inst.y,oPlacementUsed);
+        with(clearspot){instance_destroy();}
+    }
     with(inst){instance_destroy();}
     ds_list_delete(undolist,ds_list_size(undolist)-1);
 }
