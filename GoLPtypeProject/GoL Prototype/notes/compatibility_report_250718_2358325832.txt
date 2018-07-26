@@ -1,0 +1,25 @@
+macOS icon ${options_dir}\mac\icons\icon512.png written out as 32-bit
+Windows NSIS Installer Script has been set to default due to changes in GameMaker Studio 2
+Converting GML script: ${project_dir}\scripts\move\move.gml
+Converted description /// @description based on facing (set in oMovingObject) and movedist (num of tiles)/// @param set in oMovingObject
+
+Converting GML script: ${project_dir}\scripts\attack_front\attack_front.gml
+Converted description /// @description based on facing (set in oMovingObject) attacks 3 hor spaces in front/// @param set in oMovingObject
+
+Converting GML script: ${project_dir}\scripts\attack_warning\attack_warning.gml
+Converted description /// @description based on facing (set in oMovingObject) displays sHitWarning/// @param set in oMovingObject
+
+Converting GML script: ${project_dir}\scripts\mine_drop\mine_drop.gml
+Converted description /// @description drops mines behind, based on facing
+
+Font fnt_new has been converted to font family Arial (Regular) - Font has been regenerated, small inconsistencies may occur
+Converting GML script: ${project_dir}\objects\oPlayerControl\Step_0.gml
+Converted string - line 122: 'R' -> "R"
+
+Converting GML script: ${project_dir}\objects\oDamage\Alarm_0.gml
+Converted description /// @description destroys self
+
+Game speed set to 30
+Added compatibility script 'instance/instance_create.gml'
+Added compatibility script 'object/object_get_depth.gml'
+Added compatibility script '__global_object_depths.gml'
