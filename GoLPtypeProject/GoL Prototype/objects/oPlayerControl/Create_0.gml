@@ -16,4 +16,4 @@ object_num = array_create(0);
 selector = 0;
 obj = noone;
 undolist = ds_list_create();
-
+placed_something = false;

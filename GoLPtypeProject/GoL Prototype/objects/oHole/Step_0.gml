@@ -6,4 +6,3 @@ if(place_meeting(x,y,oMovingObject))
         with(inst){instance_destroy();}
     }
 }
-

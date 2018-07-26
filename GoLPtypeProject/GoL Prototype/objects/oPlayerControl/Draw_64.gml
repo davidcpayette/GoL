@@ -15,7 +15,7 @@ if(room != level0)
     }
     for(var j = 0; j < array_length_1d(object_num); j++)
     {
-        draw_text(guivalign - 40,96 + 36*j,string_hash_to_newline(string(object_num[j])));
+        draw_text(guivalign - 40,87 + 36*j,string(object_num[j]));
     }
     if(!play_hit){draw_sprite(sSelector,0,guivalign + 32,96+36*selector);}
     if(play_hit){draw_sprite(sLock,0,guivalign + 32,32);}
