@@ -29,3 +29,16 @@ if(position_meeting(mouse_x,mouse_y,oPlacementAllow) &&
 		}
     }
 }
+else if(position_meeting(mouse_x,mouse_y,oPlacementUsed) &&
+	play_hit = false)
+{
+	inst = instance_position(mouse_x,mouse_y,oPlacementUsed);
+	with(inst)
+	{
+		inst2 = instance_place(x,y,all);
+		if(inst2!=noone)
+		{
+			inst2.image_angle+=90;
+		}	
+	}	
+}

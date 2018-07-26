@@ -17,3 +17,5 @@ selector = 0;
 obj = noone;
 undolist = ds_list_create();
 placed_something = false;
+list_location = 0;
+list_obj_found = false;
